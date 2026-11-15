@@ -1,0 +1,14 @@
+# Internal preview pages, not part of the game
+artifact.html
+site-review.html
+
+# Secrets (never commit)
+.env
+*.key
+secrets*
+
+# OS / editor junk
+Thumbs.db
+desktop.ini
+.DS_Store
+.vscode/

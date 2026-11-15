@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mars Base Alpha</title>
+<meta name="description" content="14 sol boyunca bir Mars üssünü yönet. NASA Space Apps Challenge 2026 — Junior Astronaut Mission Trainer.">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira:wght@400;500;600;700&family=Saira+Condensed:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="scene"></div>
+<div id="weather"></div>
+
+<div id="lang" role="group" aria-label="Dil / Language">
+  <button type="button" id="lang-tr" aria-pressed="true">TR</button>
+  <button type="button" id="lang-en" aria-pressed="false">EN</button>
+</div>
+
+<div id="app">
+
+  <div id="top">
+    <div id="hud" class="glass notch" aria-label="Üs göstergeleri"></div>
+
+    <div id="sol" class="glass notch">
+      <span class="lbl" id="sol-lbl">SOL</span>
+      <span class="num" id="sol-num">1 / 14</span>
+    </div>
+
+    <div id="weatherbox" class="glass">
+      <div class="lbl" id="w-lbl"></div>
+      <div class="evt" id="w-evt"></div>
+      <div class="src" id="w-src"></div>
+    </div>
+  </div>
+
+  <div id="mid"></div>
+  <div id="bottom"></div>
+
+</div>
+
+<script src="data.js"></script>
+<script src="space-weather.js"></script>
+<script src="info-cards.js"></script>
+<script src="game.js"></script>
+</body>
+</html>

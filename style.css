@@ -1,0 +1,345 @@
+/* =====================================================================
+   MARS BASE ALPHA — arayüz
+   Görsel yön: üssün penceresinden Mars. Gerçek NASA yüzey fotoğrafı
+   arkada, cam panel göstergeler önde.
+   ===================================================================== */
+
+:root {
+  --panel:      rgba(7, 23, 38, 0.86);
+  --panel-deep: rgba(4, 14, 24, 0.94);
+  --edge:       #3fd0e0;
+  --edge-soft:  rgba(63, 208, 224, 0.32);
+  --edge-dim:   rgba(63, 208, 224, 0.14);
+  --text:       #e8f4f9;
+  --muted:      #8fb3c4;
+  --gold:       #f2b344;
+  --gold-soft:  rgba(242, 179, 68, 0.38);
+  --good:       #5bd97a;
+  --warn:       #f2b344;
+  --bad:        #e8584a;
+  --rust:       #c0603a;
+  --shadow:     0 18px 48px rgba(0, 0, 0, 0.55);
+}
+
+* { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: "Saira", system-ui, -apple-system, sans-serif;
+  color: var(--text);
+  background: #06111c;
+  overflow: hidden;
+}
+
+button { font-family: inherit; cursor: pointer; }
+button:focus-visible,
+[tabindex]:focus-visible { outline: 2px solid var(--edge); outline-offset: 3px; }
+
+/* ---------- sahne ---------- */
+
+#scene {
+  position: fixed;
+  inset: 0;
+  background: #1a0f0a center/cover no-repeat;
+  transition: background-image .5s ease;
+}
+#scene::after {                       /* alt kararma: kartın okunması için */
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(4,14,24,.55) 0%, rgba(4,14,24,0) 26%),
+    linear-gradient(to top,    rgba(4,14,24,.88) 0%, rgba(4,14,24,0) 46%);
+  pointer-events: none;
+}
+
+/* hava durumu katmanı — gerçek DONKI olayına göre açılır */
+#weather {
+  position: fixed; inset: 0; pointer-events: none;
+  transition: opacity .6s ease, background .6s ease;
+  opacity: 0;
+}
+#weather.dust  { opacity: 1; background: radial-gradient(ellipse at 50% 60%, rgba(190,110,60,.52), rgba(120,60,30,.78)); }
+#weather.flare { opacity: 1; background: radial-gradient(circle at 76% 16%, rgba(255,210,140,.42), rgba(180,70,40,.26) 42%, transparent 68%); }
+#weather.night { opacity: 1; background: linear-gradient(rgba(10,22,46,.62), rgba(6,14,30,.78)); }
+
+/* ---------- genel yerleşim ---------- */
+
+#app {
+  position: relative;
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: 16px;
+  gap: 12px;
+}
+
+/* ---------- cam panel ---------- */
+
+.glass {
+  background: var(--panel);
+  border: 1px solid var(--edge-soft);
+  border-radius: 6px;
+  box-shadow: var(--shadow), inset 0 1px 0 rgba(255,255,255,.07);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  position: relative;
+}
+/* köşe çentikleri — mockuptaki sci-fi çerçeve */
+.notch::before, .notch::after {
+  content: "";
+  position: absolute; width: 13px; height: 13px;
+  border: 2px solid var(--edge); opacity: .85;
+}
+.notch::before { top: -1px; left: -1px; border-right: 0; border-bottom: 0; border-radius: 4px 0 0 0; }
+.notch::after  { bottom: -1px; right: -1px; border-left: 0; border-top: 0; border-radius: 0 0 4px 0; }
+
+/* ---------- üst sıra ---------- */
+
+#top { display: flex; align-items: flex-start; gap: 12px; padding-right: 86px; }
+
+#hud { padding: 11px 13px; display: grid; gap: 7px; width: 310px; flex: none; }
+
+.bar-row { display: grid; grid-template-columns: 20px 1fr 66px; align-items: center; gap: 8px; }
+.bar-row .ico { font-size: 14px; line-height: 1; text-align: center; }
+.bar-row .name {
+  position: absolute; left: 8px; top: 50%; transform: translateY(-50%);
+  font: 600 10.5px/1 "Saira Condensed", sans-serif;
+  letter-spacing: .1em; color: #f2fbff;
+  text-shadow: 0 1px 2px rgba(0,0,0,.95), 0 0 4px rgba(0,0,0,.8);
+  pointer-events: none;
+}
+
+/* renk körlüğüne duyarlı durum işareti — renkten bağımsız da okunur */
+.st {
+  display: inline-block; width: 12px; text-align: center;
+  font: 700 11px/1 "Saira", sans-serif; margin-right: 3px;
+}
+.st.ok   { color: var(--good); }
+.st.warn { color: var(--warn); }
+.st.bad  { color: var(--bad); }
+.track {
+  position: relative; height: 17px; border-radius: 3px;
+  background: rgba(2,10,18,.78);
+  box-shadow: inset 0 1px 3px rgba(0,0,0,.7);
+  overflow: hidden;
+}
+.fill {
+  position: absolute; inset: 0 auto 0 0;
+  background: linear-gradient(90deg, var(--good), var(--edge));
+  transition: width .45s cubic-bezier(.3,.8,.4,1), background .3s;
+}
+.fill.warn { background: linear-gradient(90deg, #f2b344, #f2d04a); }
+.fill.bad  { background: linear-gradient(90deg, #e8584a, #f08a5a); }
+.pct {
+  font: 600 12px/1 "Saira", sans-serif;
+  font-variant-numeric: tabular-nums; text-align: right; color: var(--text);
+}
+.delta {
+  font: 600 11px/1 "Saira", sans-serif;
+  margin-left: 4px; opacity: 0;
+  transition: opacity .3s;
+}
+.delta.show { opacity: 1; }
+.delta.up   { color: var(--good); }
+.delta.down { color: var(--bad); }
+
+#sol {
+  padding: 9px 15px; text-align: center; flex: none;
+  display: grid; gap: 1px; align-content: center;
+}
+#sol .lbl { font: 600 10px/1 "Saira Condensed", sans-serif; letter-spacing: .22em; color: var(--muted); }
+#sol .num { font: 700 23px/1 "Saira Condensed", sans-serif; letter-spacing: .04em; color: var(--edge); }
+
+#weatherbox { padding: 9px 13px; margin-left: auto; max-width: 350px; }
+#weatherbox .lbl {
+  font: 600 10px/1 "Saira Condensed", sans-serif;
+  letter-spacing: .18em; color: var(--muted); margin-bottom: 5px;
+}
+#weatherbox .evt { font-size: 12.5px; line-height: 1.4; }
+#weatherbox .evt b { color: var(--gold); font-weight: 600; }
+#weatherbox .src { font-size: 10px; color: var(--muted); margin-top: 4px; }
+
+#lang {
+  position: fixed; top: 16px; right: 16px; z-index: 6;
+  display: flex; gap: 2px; padding: 3px;
+  background: var(--panel-deep); border: 1px solid var(--edge-dim); border-radius: 5px;
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+}
+#lang button {
+  border: 0; background: transparent; color: var(--muted);
+  font: 700 11px/1 "Saira Condensed", sans-serif; letter-spacing: .12em;
+  padding: 7px 10px; border-radius: 3px;
+}
+#lang button[aria-pressed="true"] { background: var(--edge); color: #04131f; }
+
+/* ---------- orta ---------- */
+
+#mid {
+  display: grid; align-items: center; justify-items: center;
+  min-height: 0; overflow-y: auto; overflow-x: hidden;
+  padding: 4px;
+}
+
+/* ---------- alt: karar kartı ---------- */
+
+#bottom { display: grid; justify-items: center; }
+
+.card {
+  width: min(760px, 100%);
+  padding: 20px 24px 22px;
+  display: grid; gap: 13px;
+  animation: rise .35s ease both;
+}
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } }
+
+.card h2 {
+  margin: 0; text-align: center; text-wrap: balance;
+  font: 700 25px/1.15 "Saira Condensed", sans-serif;
+  letter-spacing: .03em; color: var(--text);
+}
+.card h2.alarm { color: var(--gold); }
+.card p.body {
+  margin: 0; text-align: center; font-size: 15.5px; line-height: 1.55;
+  max-width: 60ch; justify-self: center; color: #d6e8f0;
+}
+
+.choices { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 3px; }
+
+.choice {
+  padding: 14px 16px; border-radius: 5px; text-align: left;
+  background: rgba(6,22,36,.72);
+  border: 1px solid var(--edge-soft);
+  color: var(--text); display: grid; gap: 5px;
+  transition: transform .12s, border-color .2s, background .2s;
+}
+.choice .tag {
+  font: 700 10.5px/1 "Saira Condensed", sans-serif;
+  letter-spacing: .18em; color: var(--edge);
+}
+.choice .txt { font: 600 16px/1.25 "Saira", sans-serif; }
+.choice:hover  { background: rgba(10,38,58,.86); border-color: var(--edge); transform: translateY(-2px); }
+.choice:active { transform: translateY(0); }
+.choice.gold .tag { color: var(--gold); }
+.choice.gold { border-color: var(--gold-soft); }
+.choice.gold:hover { border-color: var(--gold); background: rgba(48,32,10,.8); }
+
+/* seçeneğin bedeli butonun üstünde: simge + yön + miktar */
+.fxrow { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 3px; }
+.fx {
+  font: 600 11.5px/1 "Saira", sans-serif;
+  padding: 4px 7px; border-radius: 99px;
+  background: rgba(2,12,22,.6); border: 1px solid transparent;
+  font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+.fx.up   { color: var(--good); border-color: rgba(91,217,122,.35); }
+.fx.down { color: #ff8e7c; border-color: rgba(232,88,74,.35); }
+
+/* kriz kartı: nabız gibi atan kenar */
+.crisis { border-color: rgba(232,88,74,.6); animation: alarmPulse 1.9s ease-in-out infinite; }
+@keyframes alarmPulse {
+  0%, 100% { box-shadow: var(--shadow), 0 0 0 0 rgba(232,88,74,.35); }
+  50%      { box-shadow: var(--shadow), 0 0 26px 3px rgba(232,88,74,.3); }
+}
+
+/* ---------- bilgi köşesi ---------- */
+
+.info { border-color: var(--gold-soft); }
+.info .ribbon {
+  justify-self: center;
+  font: 700 10.5px/1 "Saira Condensed", sans-serif;
+  letter-spacing: .22em; color: var(--gold);
+  border: 1px solid var(--gold-soft); border-radius: 99px;
+  padding: 5px 13px;
+}
+.info h3 {
+  margin: 0; text-align: center;
+  font: 700 21px/1.2 "Saira Condensed", sans-serif; color: var(--gold);
+}
+.info .src {
+  text-align: center; font-size: 11.5px; color: var(--muted);
+  border-top: 1px solid var(--edge-dim); padding-top: 9px;
+}
+.changes {
+  display: flex; flex-wrap: wrap; gap: 7px; justify-content: center;
+}
+.chip {
+  font: 600 12.5px/1 "Saira", sans-serif;
+  padding: 6px 10px; border-radius: 99px;
+  background: rgba(6,22,36,.8); border: 1px solid var(--edge-dim);
+}
+.chip.up   { color: var(--good); border-color: rgba(91,217,122,.4); }
+.chip.down { color: var(--bad);  border-color: rgba(232,88,74,.4); }
+
+.go {
+  justify-self: center; margin-top: 2px;
+  border: 0; border-radius: 5px; padding: 12px 34px;
+  font: 700 15px/1 "Saira Condensed", sans-serif; letter-spacing: .14em;
+  color: #04131f; background: linear-gradient(180deg, #6fe3f0, var(--edge));
+  box-shadow: 0 4px 0 #1d8a98, 0 10px 22px rgba(0,0,0,.4);
+  transition: transform .1s, box-shadow .1s;
+}
+.go:active { transform: translateY(3px); box-shadow: 0 1px 0 #1d8a98; }
+.go.gold { background: linear-gradient(180deg, #ffd07a, var(--gold)); box-shadow: 0 4px 0 #a9761c, 0 10px 22px rgba(0,0,0,.4); }
+.go.gold:active { box-shadow: 0 1px 0 #a9761c; }
+
+/* ---------- giriş & bölge seçimi ---------- */
+
+.sheet {
+  width: min(960px, 100%); padding: 30px 32px 32px;
+  display: grid; gap: 16px; justify-items: center;
+}
+.sheet .kicker {
+  font: 600 11px/1 "Saira Condensed", sans-serif;
+  letter-spacing: .3em; color: var(--edge);
+}
+.sheet h1 {
+  margin: 0; text-align: center;
+  font: 700 clamp(34px, 6vw, 52px)/1 "Saira Condensed", sans-serif;
+  letter-spacing: .05em;
+}
+.sheet h1 span { color: var(--rust); }
+.sheet .sub { margin: 0; text-align: center; max-width: 58ch; color: #cfe4ee; font-size: 15.5px; line-height: 1.6; }
+.sheet .fine { font-size: 11.5px; color: var(--muted); text-align: center; max-width: 70ch; }
+
+.sites { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; width: 100%; }
+.site {
+  padding: 0; overflow: hidden; text-align: left; color: var(--text);
+  background: rgba(6,22,36,.72); border: 1px solid var(--edge-soft);
+  border-radius: 6px; display: flex; flex-direction: column;
+  transition: transform .14s, border-color .2s;
+}
+.site:hover { transform: translateY(-3px); border-color: var(--edge); }
+.site img { width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block; }
+.site .meat { padding: 11px 13px 14px; display: grid; gap: 5px; }
+.site .tagline {
+  font: 700 9.5px/1 "Saira Condensed", sans-serif;
+  letter-spacing: .16em; color: var(--gold);
+}
+.site h3 { margin: 0; font: 700 18px/1.1 "Saira Condensed", sans-serif; }
+.site .coord { font-size: 10.5px; color: var(--edge); line-height: 1.35; }
+.site ul { margin: 2px 0 0; padding: 0; list-style: none; display: grid; gap: 3px; }
+.site li { font-size: 12px; line-height: 1.35; display: grid; grid-template-columns: 12px 1fr; gap: 6px; }
+.site li.p i { color: var(--good); font-style: normal; font-weight: 700; }
+.site li.c i { color: var(--bad);  font-style: normal; font-weight: 700; }
+
+/* ---------- bitiş ---------- */
+
+.end-icon { font-size: 50px; line-height: 1; }
+.scoreline { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+
+/* ---------- küçük ekran ---------- */
+
+@media (max-width: 760px) {
+  #top { flex-wrap: wrap; }
+  #hud { width: 100%; order: 2; }
+  #weatherbox { margin-left: 0; max-width: 100%; order: 3; width: 100%; }
+  .choices, .sites { grid-template-columns: 1fr; }
+  .card h2 { font-size: 21px; }
+  .card p.body { font-size: 14.5px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
