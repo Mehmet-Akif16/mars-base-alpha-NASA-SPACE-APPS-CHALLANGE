@@ -89,6 +89,12 @@ assets/            Mars Trek maps and NASA photos
 data/              raw NASA downloads (DONKI, RadLab, image searches)
 ```
 
+## Team
+
+- [@Mehmet-Akif16](https://github.com/Mehmet-Akif16)
+- [@cxsroxy](https://github.com/cxsroxy)
+- [@yeqkaa](https://github.com/yeqkaa)
+
 ## Disclaimer
 
 NASA does not endorse any non-U.S. Government entity and is not responsible for information contained on non-U.S. Government websites.
