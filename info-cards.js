@@ -9,21 +9,24 @@ window.INFO_CARDS = {
     titleEn: 'Natural Shields on Mars',
     textTr: 'Mars\'ta Dünya\'daki gibi gezegeni saran manyetik kalkan yok, havası da çok ince; bu yüzden yüzeye daha fazla radyasyon ulaşır. Curiosity\'nin RAD aleti bunu ölçtü; toprak, krater duvarları ve lav tüpleri siper olabilir.',
     textEn: 'Mars has no planet-wide magnetic shield like Earth\'s, and its air is very thin, so more radiation reaches the surface. NASA\'s Curiosity rover measured this with its RAD instrument; soil, crater walls and lava tubes could make good shelters.',
-    source: 'NASA/JPL – Curiosity (MSL) gezgini, RAD (Radiation Assessment Detector) yüzey radyasyon ölçümleri'
+    source: 'NASA/JPL – Curiosity (MSL) gezgini, RAD (Radiation Assessment Detector) yüzey radyasyon ölçümleri',
+    sourceEn: 'NASA/JPL – Curiosity (MSL) rover, RAD (Radiation Assessment Detector) surface radiation measurements'
   },
   '1.2': {
     titleTr: 'Mars\'ta Oksijen Üreten Cihaz',
     titleEn: 'The Device That Made Oxygen on Mars',
     textTr: 'NASA\'nın MOXIE cihazı, Mars\'ın karbondioksit dolu havasını çok ısıtıp elektrikle parçaladı ve gerçek oksijen üretti. İlk denemesinde bir astronotun yaklaşık 10 dakika nefes almasına yetecek oksijen çıkardı.',
     textEn: 'NASA\'s MOXIE device heated the carbon dioxide air of Mars and used electricity to split it, making real oxygen. On its first try it made enough oxygen for an astronaut to breathe for about 10 minutes.',
-    source: 'NASA JPL - MOXIE, Perseverance roveri (ilk oksijen üretimi: 20 Nisan 2021, yaklaşık 5 gram)'
+    source: 'NASA JPL - MOXIE, Perseverance roveri (ilk oksijen üretimi: 20 Nisan 2021, yaklaşık 5 gram)',
+    sourceEn: 'NASA JPL - MOXIE, Perseverance rover (first oxygen produced: 20 April 2021, about 5 grams)'
   },
   '2.1': {
     titleTr: 'Mars Gecesi Çok Soğuk',
     titleEn: 'Freezing Nights On Mars',
     textTr: 'Mars\'ta geceler dondurucu soğuktur. Keşif araçları donmamak için küçük ısıtıcılar ve özel yalıtım taşır; ısınmak için her gece ciddi miktarda enerji harcarlar.',
     textEn: 'Nights on Mars are freezing cold. Rovers carry tiny heaters and special insulation so they do not freeze, and they use a lot of energy just to stay warm each night.',
-    source: 'NASA Mars Exploration Rovers – Spirit ve Opportunity (radyoizotop ısıtıcı birimleri ve aerojel yalıtımlı sıcak elektronik kutusu)'
+    source: 'NASA Mars Exploration Rovers – Spirit ve Opportunity (radyoizotop ısıtıcı birimleri ve aerojel yalıtımlı sıcak elektronik kutusu)',
+    sourceEn: 'NASA Mars Exploration Rovers – Spirit and Opportunity (radioisotope heater units and the aerogel-insulated warm electronics box)'
   },
   '3.1': {
     titleTr: 'Uzayda Topraksız Marul',
@@ -37,14 +40,16 @@ window.INFO_CARDS = {
     titleEn: 'Water That Doesn\'t Go to Waste',
     textTr: 'Uzay istasyonunda su neredeyse hiç israf olmaz. Astronotların teri, nefesindeki nem ve idrarı bile temizlenip tekrar içme suyuna dönüşür; NASA 2023\'te suyun yüzde 98\'ini geri kazandığını duyurdu.',
     textEn: 'On the space station, almost no water is wasted. Astronauts\' sweat, the moisture in their breath and even their urine are cleaned and turned back into drinking water; in 2023 NASA announced it recovers 98% of the station\'s water.',
-    source: 'NASA, "NASA Achieves Water Recovery Milestone on International Space Station" (Haziran 2023) - ISS ECLSS su geri kazanım sistemi'
+    source: 'NASA, "NASA Achieves Water Recovery Milestone on International Space Station" (Haziran 2023) - ISS ECLSS su geri kazanım sistemi',
+    sourceEn: 'NASA, "NASA Achieves Water Recovery Milestone on International Space Station" (June 2023) - ISS ECLSS water recovery system'
   },
   '4.1': {
     titleTr: 'Güneş Fırtınası ve Sığınak',
     titleEn: 'Solar Storm and Shelter',
     textTr: 'Güneş bazen çok hızlı parçacıklar fırlatır. NASA bu olayları izler; astronotlar su ya da toprak dolu duvarların radyasyonun çoğunu tuttuğu bir sığınağa geçer.',
     textEn: 'The Sun sometimes throws out very fast particles. NASA tracks these events, and astronauts move into a shelter where walls of water or soil block most of the radiation.',
-    source: 'NASA Moon to Mars Space Weather Analysis Office (M2M SWAO); NASA CCMC DONKI veritabanı'
+    source: 'NASA Moon to Mars Space Weather Analysis Office (M2M SWAO); NASA CCMC DONKI veritabanı',
+    sourceEn: 'NASA Moon to Mars Space Weather Analysis Office (M2M SWAO); NASA CCMC DONKI database'
   },
   '4.2': {
     titleTr: '90 Gün Yerine Yıllarca',
@@ -72,28 +77,32 @@ window.INFO_CARDS = {
     titleEn: 'Daily Exercise in Space',
     textTr: 'Uzayda kaslar ve kemikler zayıflar. Bu yüzden astronotlar uzay istasyonunda her gün yaklaşık iki saat spor yapar; ARED adlı alette ağırlık kaldırır gibi çalışırlar.',
     textEn: 'In space, muscles and bones get weaker. That is why astronauts on the space station exercise about two hours every day; on a machine called ARED they train as if they were lifting weights.',
-    source: 'NASA – ISS\'te egzersiz ve ARED (Advanced Resistive Exercise Device)'
+    source: 'NASA – ISS\'te egzersiz ve ARED (Advanced Resistive Exercise Device)',
+    sourceEn: 'NASA – exercise on the ISS and ARED (Advanced Resistive Exercise Device)'
   },
   '7.1': {
     titleTr: 'Robotlar Yardıma Koşar',
     titleEn: 'Robots Lend a Hand',
     textTr: 'Uzay yürüyüşüne hazırlanmak saatler sürer ve risklidir. NASA robot yardımcılar geliştirdi: Astrobee istasyonun içinde uçarak günlük işleri yapar, Robonaut 2 ise alet tutabilen insansı bir robottur.',
     textEn: 'Getting ready for a spacewalk takes hours and is risky. NASA also built robot helpers: Astrobee flies inside the station doing routine chores, and Robonaut 2 is a humanlike robot that can hold tools.',
-    source: 'NASA - Astrobee (ISS içinde serbest uçan robot) ve Robonaut 2 (ISS\'te 2011-2018)'
+    source: 'NASA - Astrobee (ISS içinde serbest uçan robot) ve Robonaut 2 (ISS\'te 2011-2018)',
+    sourceEn: 'NASA - Astrobee (free-flying robot inside the ISS) and Robonaut 2 (on the ISS 2011-2018)'
   },
   '8.1': {
     titleTr: 'Toza Dayanıklı Güç',
     titleEn: 'Dust-Proof Power',
     textTr: 'Mars\'ta toz fırtınaları bazen tüm gezegeni kaplar ve aylarca gökyüzünü karartır. Perseverance güneş paneli yerine ısıyı elektriğe çeviren bir güç kaynağı kullanır, bu yüzden toz onu durduramaz.',
     textEn: 'On Mars, dust storms sometimes cover the whole planet and darken the sky for months. Perseverance uses a power unit that turns heat into electricity instead of solar panels, so dust cannot stop it.',
-    source: 'NASA/JPL - MMRTG radyoizotop güç kaynağı (Curiosity ve Perseverance)'
+    source: 'NASA/JPL - MMRTG radyoizotop güç kaynağı (Curiosity ve Perseverance)',
+    sourceEn: 'NASA/JPL - MMRTG radioisotope power system (Curiosity and Perseverance)'
   },
   '8.2': {
     titleTr: 'Mars\'ta Hava Durumu',
     titleEn: 'Weather on Mars',
     textTr: 'Perseverance ve Curiosity araçları Mars\'ta havayı ölçüyor: sıcaklık ve basınç. Perseverance ayrıca rüzgarı ve tozu izliyor; bu bilgiler toz fırtınalarını görmeye ve gelecekteki astronotları korumaya yarar.',
     textEn: 'On Mars, the Perseverance and Curiosity rovers measure the weather: temperature and pressure. Perseverance also tracks wind and dust; these readings help spot dust storms and protect future astronauts.',
-    source: 'NASA JPL - MEDA aleti (Perseverance) ve REMS aleti (Curiosity)'
+    source: 'NASA JPL - MEDA aleti (Perseverance) ve REMS aleti (Curiosity)',
+    sourceEn: 'NASA JPL - MEDA instrument (Perseverance) and REMS instrument (Curiosity)'
   },
   '9.1': {
     titleTr: 'Atıktan Temiz Su',
@@ -114,27 +123,31 @@ window.INFO_CARDS = {
     titleEn: 'Tea Leaves Found the Leak',
     textTr: 'Uzayda hava basıncı olmazsa insanlar nefes alamaz; bu yüzden en küçük kaçak bile ciddidir. ISS\'te mürettebat 2020\'de Zvezda modülündeki küçük kaçağı süzülen çay yapraklarıyla bulup yamadı.',
     textEn: 'Without air pressure people cannot breathe, so even a tiny leak is serious. In 2020 the ISS crew watched drifting tea leaves to find a small crack in the Zvezda module and patched it.',
-    source: 'NASA / Roscosmos - ISS Zvezda modülü hava kaçağı (Ekim 2020)'
+    source: 'NASA / Roscosmos - ISS Zvezda modülü hava kaçağı (Ekim 2020)',
+    sourceEn: 'NASA / Roscosmos - ISS Zvezda module air leak (October 2020)'
   },
   '12.1': {
     titleTr: 'Uzayda Yetişen İlk Yiyecek',
     titleEn: 'First Food Grown in Space',
     textTr: '2015\'te astronotlar uzay istasyonunda yetiştirdikleri marulu ilk kez yediler. NASA\'nın Veggie bahçesinde sonra çiçek açtı, domates yetişti; taze yiyecek morali yükseltir.',
     textEn: 'In 2015, astronauts ate lettuce they grew on the space station for the first time. NASA\'s Veggie garden later grew a flower and then tomatoes; fresh food lifts their spirits.',
-    source: 'NASA Veggie bitki deneyi, Uluslararası Uzay İstasyonu (2015-2023)'
+    source: 'NASA Veggie bitki deneyi, Uluslararası Uzay İstasyonu (2015-2023)',
+    sourceEn: 'NASA Veggie plant experiment, International Space Station (2015-2023)'
   },
   '13.1': {
     titleTr: '90 Gün, 15 Yıl',
     titleEn: '90 Days, 15 Years',
     textTr: 'Opportunity aracı 90 Mars günü (yaklaşık 3 ay) çalışmak için tasarlandı ama neredeyse 15 yıl dayandı. Hiçbir makine sonsuza kadar dayanmaz, her fazladan zorlama risk taşır.',
     textEn: 'The Opportunity rover was designed to work for 90 Martian days (about 3 months), but it kept going for nearly 15 years. No machine lasts forever, and every extra push carries a risk.',
-    source: 'NASA/JPL, Mars Exploration Rover Opportunity (MER-B): 90 sollük ana görev; iniş 25 Ocak 2004, son sinyal 10 Haziran 2018, görev sonu 13 Şubat 2019'
+    source: 'NASA/JPL, Mars Exploration Rover Opportunity (MER-B): 90 sollük ana görev; iniş 25 Ocak 2004, son sinyal 10 Haziran 2018, görev sonu 13 Şubat 2019',
+    sourceEn: 'NASA/JPL, Mars Exploration Rover Opportunity (MER-B): 90-sol prime mission; landed 25 January 2004, last signal 10 June 2018, mission ended 13 February 2019'
   },
   '13.2': {
     titleTr: 'Sinyal Yolda Gecikir',
     titleEn: 'Signals Take Time',
     textTr: 'Mars\'tan Dünya\'ya gönderdiğin mesaj yolda 5 ila 20 dakika geçirir, bu yüzden anında cevap alamazsın. NASA bu sinyalleri Dünya\'nın üç ayrı köşesindeki dev antenlerle yakalar.',
     textEn: 'A message you send from Mars takes 5 to 20 minutes to reach Earth, so you can never get an instant reply. NASA catches these signals with giant antennas at three spots around the world.',
-    source: 'NASA Deep Space Network - üç anten kompleksi: Goldstone (ABD), Madrid (İspanya), Canberra (Avustralya); sinyal süresi: NASA Mars Exploration, "Communications"'
+    source: 'NASA Deep Space Network - üç anten kompleksi: Goldstone (ABD), Madrid (İspanya), Canberra (Avustralya); sinyal süresi: NASA Mars Exploration, "Communications"',
+    sourceEn: 'NASA Deep Space Network - three antenna complexes: Goldstone (USA), Madrid (Spain), Canberra (Australia); signal time: NASA Mars Exploration, "Communications"'
   },
 };

@@ -82,6 +82,8 @@
 
   function t(k) { return T[S.lang][k]; }
   function L(o) { return o ? (S.lang === 'tr' ? o.tr : o.en) : ''; }
+  /* Bilgi kartı kaynağı: Türkçe 'source', İngilizce 'sourceEn' (yoksa aynı metin). */
+  function srcOf(c) { return S.lang === 'tr' ? c.source : (c.sourceEn || c.source); }
   function $(id) { return document.getElementById(id); }
 
   /* ---------------- göstergeler ---------------- */
@@ -124,7 +126,9 @@
       var st = $('st-' + b.key);
       st.textContent = v <= 20 ? '✕' : v <= 40 ? '!' : '✓';
       st.className = 'st ' + (v <= 20 ? 'bad' : v <= 40 ? 'warn' : 'ok');
-      st.setAttribute('aria-label', v <= 20 ? 'kritik' : v <= 40 ? 'dikkat' : 'iyi');
+      st.setAttribute('aria-label', S.lang === 'tr'
+        ? (v <= 20 ? 'kritik' : v <= 40 ? 'dikkat' : 'iyi')
+        : (v <= 20 ? 'critical' : v <= 40 ? 'warning' : 'good'));
       $('pct-' + b.key).textContent = v;
       $('nm-' + b.key).textContent = barName(b.key);
       var d = $('dl-' + b.key);
@@ -208,7 +212,8 @@
   function screenCredits() {
     chrome(false);
     var srcs = {};
-    Object.keys(INFO).forEach(function (k) { srcs[INFO[k].source] = 1; });
+    Object.keys(INFO).forEach(function (k) { srcs[srcOf(INFO[k])] = 1; });
+    var tr = S.lang === 'tr';
     var list = Object.keys(srcs).map(function (s) { return '<li>' + s + '</li>'; }).join('');
     show(
       '<div class="sheet glass notch">' +
@@ -219,18 +224,26 @@
       '<div style="text-align:left;max-width:70ch">' +
       '<p class="fine" style="text-align:left"><b>' + (S.lang === 'tr' ? 'Veri kaynakları' : 'Data sources') + ':</b></p>' +
       '<ul class="fine" style="text-align:left;line-height:1.8">' +
-      '<li>NASA DONKI — CCMC / Moon to Mars Space Weather Analysis Office (güneş patlamaları, SEP, jeomanyetik fırtınalar, 3–16 Mayıs 2024)</li>' +
-      '<li>NASA Mars Trek — Viking MDIM2.1 küresel renkli mozaik (iniş bölgesi haritaları)</li>' +
-      '<li>NASA OSDR — OSD-895 (EDEN ISS serası), OSD-984 (kas ve kozmik ışın), OSD-1018 (izolasyon ve radyasyon)</li>' +
-      '<li>NASA RadLab (OSDR) — ISS radyasyon doz ölçümleri</li>' +
-      '<li>NASA Image and Video Library — PIA26680, PIA24264 (Mars yüzey fotoğrafları)</li>' +
+      (tr
+        ? '<li>NASA DONKI — CCMC / Moon to Mars Space Weather Analysis Office (güneş patlamaları, SEP, jeomanyetik fırtınalar, 3–16 Mayıs 2024)</li>' +
+          '<li>NASA Mars Trek — Viking MDIM2.1 küresel renkli mozaik (iniş bölgesi haritaları)</li>' +
+          '<li>NASA OSDR — OSD-895 (EDEN ISS serası), OSD-984 (kas ve kozmik ışın), OSD-1018 (izolasyon ve radyasyon)</li>' +
+          '<li>NASA RadLab (OSDR) — ISS radyasyon doz ölçümleri</li>' +
+          '<li>NASA Image and Video Library — PIA26680, PIA24264 (Mars yüzey fotoğrafları)</li>'
+        : '<li>NASA DONKI — CCMC / Moon to Mars Space Weather Analysis Office (solar flares, SEP, geomagnetic storms, 3–16 May 2024)</li>' +
+          '<li>NASA Mars Trek — Viking MDIM2.1 global color mosaic (landing site maps)</li>' +
+          '<li>NASA OSDR — OSD-895 (EDEN ISS greenhouse), OSD-984 (muscle and cosmic radiation), OSD-1018 (isolation and radiation)</li>' +
+          '<li>NASA RadLab (OSDR) — ISS radiation dose measurements</li>' +
+          '<li>NASA Image and Video Library — PIA26680, PIA24264 (Mars surface photos)</li>') +
       list +
       '</ul>' +
       '<p class="fine" style="text-align:left"><b>' + (S.lang === 'tr' ? 'Yapay zekâ kullanımı' : 'Use of AI') + ':</b> ' +
       (S.lang === 'tr'
         ? 'Oyun kodu, arayüz tasarımı ve bilgi kartı metinleri Claude (Anthropic) yardımıyla yazılmıştır. Senaryo ve hikâye takım tarafından yazılmıştır. Her bilgi kartı, ayrı bir doğrulama adımından geçirilerek NASA kaynaklarıyla karşılaştırılmıştır.'
         : 'Game code, interface design and fact-card text were written with the help of Claude (Anthropic). The scenario and story were written by the team. Every fact card was run through a separate verification step against NASA sources.') + '</p>' +
-      '<p class="fine" style="text-align:left">NASA, ABD Hükümeti dışındaki hiçbir kuruluşu desteklemez ve bu kuruluşların web sitelerindeki bilgilerden sorumlu değildir.</p>' +
+      '<p class="fine" style="text-align:left">' + (tr
+        ? 'NASA, ABD Hükümeti dışındaki hiçbir kuruluşu desteklemez ve bu kuruluşların web sitelerindeki bilgilerden sorumlu değildir.'
+        : 'NASA does not endorse any non-U.S. Government entity and is not responsible for information contained on non-U.S. Government websites.') + '</p>' +
       '</div>' +
       '<button class="go" id="btn-back">' + t('back') + '</button>' +
       '</div>'
@@ -325,7 +338,7 @@
       '<h3>' + (S.lang === 'tr' ? card.titleTr : card.titleEn) + '</h3>' +
       '<p class="body">' + (S.lang === 'tr' ? card.textTr : card.textEn) + '</p>' +
       '<div class="changes">' + chips + '</div>' +
-      '<p class="src">' + t('srcLabel') + ': ' + card.source + '</p>' +
+      '<p class="src">' + t('srcLabel') + ': ' + srcOf(card) + '</p>' +
       '<button class="go gold" id="btn-next">' + (S.queue.length ? t('next') : t('nextSol')) + '</button>' +
       '</div>'
     );
